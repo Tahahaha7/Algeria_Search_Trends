@@ -20,7 +20,7 @@ _Please don't hesitate to recommend any interesting topics to explore_
 
 ## Football Players
 
-<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2213_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"/m/06qjgc","geo":"DZ","time":"2010-06-11 2020-07-11"},{"keyword":"/m/02xt6q","geo":"DZ","time":"2010-06-11 2020-07-11"}],"category":0,"property":"youtube"}, {"exploreQuery":"date=2010-06-11%202020-07-11&geo=DZ&gprop=youtube&q=%2Fm%2F06qjgc,%2Fm%2F02xt6q","guestPath":"https://trends.google.com:443/trends/embed/"}); </script> 
+</script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"/m/06qjgc","geo":"DZ","time":"2010-06-11 2020-07-11"},{"keyword":"/m/02xt6q","geo":"DZ","time":"2010-06-11 2020-07-11"}],"category":0,"property":"youtube"}, {"exploreQuery":"date=2010-06-11%202020-07-11&geo=DZ&gprop=youtube&q=%2Fm%2F06qjgc,%2Fm%2F02xt6q","guestPath":"https://trends.google.com:443/trends/embed/"}); </script> 
 
 
 <script type="text/javascript"> trends.embed.renderExploreWidget("GEO_MAP", {"comparisonItem":[{"keyword":"/m/06qjgc","geo":"DZ","time":"today 5-y"},{"keyword":"/m/02xt6q","geo":"DZ","time":"today 5-y"},{"keyword":"/m/0_1k32v","geo":"DZ","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&geo=DZ&q=%2Fm%2F06qjgc,%2Fm%2F02xt6q,%2Fm%2F0_1k32v","guestPath":"https://trends.google.com:443/trends/embed/"}); </script> 
