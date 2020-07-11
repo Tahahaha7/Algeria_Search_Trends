@@ -4,7 +4,7 @@ Every year, Google posts [Year in Search](https://trends.google.com/trends/yis/2
   
   
 
-## Automobile Manufacturers [Web Search]
+## **Automobile Manufacturers [Web Search]**
 The map highlights almost a perfect split between three regions of the country:
 - **North East:** the majority of provinces had **Peugeot** as the top searched car brand
 - **North West:** the majority of provinces had **Renault** as the top searched car brand
