@@ -1,10 +1,10 @@
-# Exploring Google Search Trends in Algeria
+# Introduction
 
 Every year, Google posts [Year in Search](https://trends.google.com/trends/yis/2019/US/), a recap of many countries' most searched topics. Sadly, the reports don't cover Algeria, so I decided to make a series of exciting searches that might challenge our prejudgments and maybe even inspire us. The data is compiled by Google and is publicly available through [Google Trends API](https://trends.google.com/).  
   
   
 
-## **Automobile Manufacturers [Web Search]**
+# Automobile Manufacturers [Web Search]
 The map highlights almost a perfect split between three regions of the country:
 - **North East:** the majority of provinces had **Peugeot** as the top searched car brand
 - **North West:** the majority of provinces had **Renault** as the top searched car brand
@@ -19,7 +19,7 @@ I'm not sure about the divide between Peugeot and Renault in the North. Neverthe
   
   
   
-## Algerian TV Channels [YouTube]
+# Algerian TV Channels [YouTube]
 Algeria's media outlets witnessed a massive growth in the past decade, and two of the prominent channels are Ennahar and Echorouk. In the past five years, Ennahar TV had a clear edge over Echorouk illustrated by the graph below. The annual spikes that appear around the beginning of the summer are due to the increase of viewership during Ramadhan's holy month since both TV networks invest heavily in new programs and shows.  
   
   
@@ -33,7 +33,7 @@ Samira TV is also popular in Algeria's YouTube search; I also added BeIN Sports,
   
   
   
-## Baklava vs. Zlabia [Web Search]
+# Baklava vs. Zlabia [Web Search]
 My favorite visualization not only because it concerns food, but because this pattern appears to be a nationwide phenomenon. Zlabia (Also known as Jalebi) is a delicacy that Algerians enjoy during Ramadhan's holy month. You can notice that the search for recipes starts at the beginning of the summer. Exactly after four weeks (days before Aid celebration), Baklava dominates the search to be three times are Zlabia. I was excited to see that this pattern appeared everywhere in Algeria, Zlabia comes first then Baklava takes over by the end of the month.  
   
   
@@ -41,7 +41,7 @@ My favorite visualization not only because it concerns food, but because this pa
   
   
   
-## Football Players [YouTube]
+# Football Players [YouTube]
 I remember endless disputes about the two most famous football players, and I suspect that it might be the most polarizing topic among young people in Algeria. The data has spoken based on YouTube searches for the past **10 years**, it looks like CR7 was always the most viewed footballer on the platform.  
   
   
@@ -55,7 +55,7 @@ Riyad Mahrez stole the show after the phenomenal championship win with Leicester
   
   
   
-## Baccalauréat vs. Équipe nationale
+# Baccalauréat vs. Équipe nationale
 The stress of finding out about the Baccalaureate results breaks the internet in Algeria; the spikes are very noticeable every beginning of summer. However, the announcement of Baccalaureat results synchronized with Algeria's national football team's crowning as the champions of Africa. It was interesting to witness the overlap of the two events based on people's search topics.  
   
   
@@ -63,7 +63,7 @@ The stress of finding out about the Baccalaureate results breaks the internet in
   
   
   
-## Soolking vs. L'Algérino [YouTube]
+# Soolking vs. L'Algérino [YouTube]
 Finally, I came across Algeria's music scene to pick the most streamed artists in the last **5 years**. It seems that L'Algeriano was taken over by Soolking in a span of two years, making him the most searched artist on YouTube.  
   
   
@@ -71,5 +71,5 @@ Finally, I came across Algeria's music scene to pick the most streamed artists i
   
   
   
-### Contact & Feedback
+## Contact & Feedback
 Visit: [tahabouhoun.xyz](https://tahabouhoun.xyz/)
