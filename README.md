@@ -14,16 +14,22 @@ _Please don't hesitate to recommend any interesting topics to explore_
 
 <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"/g/12mb3nyc_","geo":"DZ","time":"today 5-y"},{"keyword":"/g/11cft_9wd","geo":"DZ","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&geo=DZ&q=%2Fg%2F12mb3nyc_,%2Fg%2F11cft_9wd","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
 
-## Baklava vs. Jalebi (Zlabia)
+
+Past Three Years
+<script type="text/javascript"> trends.embed.renderExploreWidget("GEO_MAP", {"comparisonItem":[{"keyword":"/g/12mb3nyc_","geo":"DZ","time":"2017-06-11 2020-07-11"},{"keyword":"/g/11cft_9wd","geo":"DZ","time":"2017-06-11 2020-07-11"},{"keyword":"/g/12nvpdy6s","geo":"DZ","time":"2017-06-11 2020-07-11"},{"keyword":"/m/0jkvk2z","geo":"DZ","time":"2017-06-11 2020-07-11"}],"category":0,"property":"youtube"}, {"exploreQuery":"date=2017-06-11%202020-07-11&geo=DZ&gprop=youtube&q=%2Fg%2F12mb3nyc_,%2Fg%2F11cft_9wd,%2Fg%2F12nvpdy6s,%2Fm%2F0jkvk2z","guestPath":"https://trends.google.com:443/trends/embed/"}); </script> 
+
+
+## Baklava vs. Zlabia [Web Search]
 
 <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"/m/0g07j","geo":"DZ","time":"today 5-y"},{"keyword":"/m/04nyjg","geo":"DZ","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&geo=DZ&q=%2Fm%2F0g07j,%2Fm%2F04nyjg","guestPath":"https://trends.google.com:443/trends/embed/"}); </script> 
 
-## Football Players
+## Football Players [YouTube]
 
-</script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"/m/06qjgc","geo":"DZ","time":"2010-06-11 2020-07-11"},{"keyword":"/m/02xt6q","geo":"DZ","time":"2010-06-11 2020-07-11"}],"category":0,"property":"youtube"}, {"exploreQuery":"date=2010-06-11%202020-07-11&geo=DZ&gprop=youtube&q=%2Fm%2F06qjgc,%2Fm%2F02xt6q","guestPath":"https://trends.google.com:443/trends/embed/"}); </script> 
+In the past 10 years 
+<script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"/m/06qjgc","geo":"DZ","time":"2010-06-11 2020-07-11"},{"keyword":"/m/02xt6q","geo":"DZ","time":"2010-06-11 2020-07-11"}],"category":0,"property":"youtube"}, {"exploreQuery":"date=2010-06-11%202020-07-11&geo=DZ&gprop=youtube&q=%2Fm%2F06qjgc,%2Fm%2F02xt6q","guestPath":"https://trends.google.com:443/trends/embed/"}); </script> 
 
-
-<script type="text/javascript"> trends.embed.renderExploreWidget("GEO_MAP", {"comparisonItem":[{"keyword":"/m/06qjgc","geo":"DZ","time":"today 5-y"},{"keyword":"/m/02xt6q","geo":"DZ","time":"today 5-y"},{"keyword":"/m/0_1k32v","geo":"DZ","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&geo=DZ&q=%2Fm%2F06qjgc,%2Fm%2F02xt6q,%2Fm%2F0_1k32v","guestPath":"https://trends.google.com:443/trends/embed/"}); </script> 
+In the past 5 years
+<script type="text/javascript"> trends.embed.renderExploreWidget("GEO_MAP", {"comparisonItem":[{"keyword":"/m/06qjgc","geo":"DZ","time":"today 5-y"},{"keyword":"/m/02xt6q","geo":"DZ","time":"today 5-y"},{"keyword":"/m/0_1k32v","geo":"DZ","time":"today 5-y"}],"category":0,"property":"youtube"}, {"exploreQuery":"date=today%205-y&geo=DZ&gprop=youtube&q=%2Fm%2F06qjgc,%2Fm%2F02xt6q,%2Fm%2F0_1k32v","guestPath":"https://trends.google.com:443/trends/embed/"}); </script> 
 
 ## Baccalauréat vs. Équipe nationale
 
