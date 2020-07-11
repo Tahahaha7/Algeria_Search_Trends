@@ -6,33 +6,28 @@ _Please don't hesitate to recommend any interesting topics to explore_
 
 ## Most searched TV Channels on Youtube
 
-Large and comprehensive data sets can help us understand phenomena as diverse as the finance and banking sector, the evolution of friendship networks or the vulnerability of ecosystems. But data offer more possibilities: For the first time in history we not only start to understand the functioning of complex systems, but have the tools at hand to model them. This allows us to make predictions. And further it gets: With the help of supercomputers we can start simulating reactions and (unintended) consequences of interventions in a given complex system without the costly trial-and-errors in real life.
-
-<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2213_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"/g/12mb3nyc_","geo":"DZ","time":"today 5-y"},{"keyword":"/g/11cft_9wd","geo":"DZ","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&geo=DZ&q=%2Fg%2F12mb3nyc_,%2Fg%2F11cft_9wd","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>  
+<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2213_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"/g/12mb3nyc_","geo":"DZ","time":"today 5-y"},{"keyword":"/g/11cft_9wd","geo":"DZ","time":"today 5-y"}],"category":0,"property":""},
+{"exploreQuery":"date=today%205-y&geo=DZ&q=%2Fg%2F12mb3nyc_,%2Fg%2F11cft_9wd","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>  
   
   
 
 ## Car Companies on Google
 
-Large and comprehensive data sets can help us understand phenomena as diverse as the finance and banking sector, the evolution of friendship networks or the vulnerability of ecosystems. But data offer more possibilities: For the first time in history we not only start to understand the functioning of complex systems, but have the tools at hand to model them. This allows us to make predictions. And further it gets: With the help of supercomputers we can start simulating reactions and (unintended) consequences of interventions in a given complex system without the costly trial-and-errors in real life.
-
-<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2213_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("GEO_MAP", {"comparisonItem":[{"keyword":"/m/0h5wr7c","geo":"DZ","time":"today 5-y"},{"keyword":"/m/07ywl","geo":"DZ","time":"today 5-y"},{"keyword":"/m/0h5y1j0","geo":"DZ","time":"today 5-y"},{"keyword":"/m/05b4c","geo":"DZ","time":"today 5-y"},{"keyword":"/m/0f4v1","geo":"DZ","time":"today 5-y"}],"category":0,"property":"youtube"}, {"exploreQuery":"date=today%205-y&geo=DZ&gprop=youtube&q=%2Fm%2F0h5wr7c,%2Fm%2F07ywl,%2Fm%2F0h5y1j0,%2Fm%2F05b4c,%2Fm%2F0f4v1","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>  
+<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2213_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("GEO_MAP", {"comparisonItem":[{"keyword":"/m/0h5wr7c","geo":"DZ","time":"today 5-y"},{"keyword":"/m/07ywl","geo":"DZ","time":"today 5-y"},{"keyword":"/m/0h5y1j0","geo":"DZ","time":"today 5-y"},{"keyword":"/m/05b4c","geo":"DZ","time":"today 5-y"},{"keyword":"/m/0f4v1","geo":"DZ","time":"today 5-y"}],"category":0,"property":"youtube"}, {"exploreQuery":"date=today%205y&geo=DZ&gprop=youtube&q=%2Fm%2F0h5wr7c,%2Fm%2F07ywl,%2Fm%2F0h5y1j0,%2Fm%2F05b4c,%2Fm%2F0f4v1","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>  
   
   
 
 ## Riyad Mahrez or Hirak
 
-Large and comprehensive data sets can help us understand phenomena as diverse as the finance and banking sector, the evolution of friendship networks or the vulnerability of ecosystems. But data offer more possibilities: For the first time in history we not only start to understand the functioning of complex systems, but have the tools at hand to model them. This allows us to make predictions. And further it gets: With the help of supercomputers we can start simulating reactions and (unintended) consequences of interventions in a given complex system without the costly trial-and-errors in real life.
-
-<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2213_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"Hirak","geo":"DZ","time":"2019-01-01 2020-07-10"},{"keyword":"/m/0_1k32v","geo":"DZ","time":"2019-01-01 2020-07-10"}],"category":0,"property":""}, {"exploreQuery":"date=2019-01-01%202020-07-10&geo=DZ&q=Hirak,%2Fm%2F0_1k32v","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>  
+<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2213_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"Hirak","geo":"DZ","time":"2019-01-01 2020-07-10"},{"keyword":"/m/0_1k32v","geo":"DZ","time":"2019-01-01 2020-07-10"}],"category":0,"property":""},
+{"exploreQuery":"date=2019-01-01%202020-07-10&geo=DZ&q=Hirak,%2Fm%2F0_1k32v","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>  
   
   
 
 ## Real Madrid or FC Barcelona
 
-Large and comprehensive data sets can help us understand phenomena as diverse as the finance and banking sector, the evolution of friendship networks or the vulnerability of ecosystems. But data offer more possibilities: For the first time in history we not only start to understand the functioning of complex systems, but have the tools at hand to model them. This allows us to make predictions. And further it gets: With the help of supercomputers we can start simulating reactions and (unintended) consequences of interventions in a given complex system without the costly trial-and-errors in real life.
-
-<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2213_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("GEO_MAP", {"comparisonItem":[{"keyword":"/m/06l22","geo":"DZ","time":"today 5-y"},{"keyword":"/m/0hvgt","geo":"DZ","time":"today 5-y"}],"category":0,"property":"youtube"}, {"exploreQuery":"date=today%205-y&geo=DZ&gprop=youtube&q=%2Fm%2F06l22,%2Fm%2F0hvgt","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>  
+<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2213_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("GEO_MAP", {"comparisonItem":[{"keyword":"/m/06l22","geo":"DZ","time":"today 5-y"},{"keyword":"/m/0hvgt","geo":"DZ","time":"today 5-y"}],"category":0,"property":"youtube"},
+{"exploreQuery":"date=today%205-y&geo=DZ&gprop=youtube&q=%2Fm%2F06l22,%2Fm%2F0hvgt","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>  
   
   
 
