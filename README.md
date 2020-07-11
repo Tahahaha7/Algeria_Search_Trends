@@ -26,7 +26,7 @@ Algeria's media outlets witnessed a massive growth in the past decade, and two o
 <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"/g/12mb3nyc_","geo":"DZ","time":"today 5-y"},{"keyword":"/g/11cft_9wd","geo":"DZ","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&geo=DZ&q=%2Fg%2F12mb3nyc_,%2Fg%2F11cft_9wd","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>  
   
   
-Samira TV is also popular in Algeria's YouTube search; I also added BeIN Sports, given football's popularity. Below is a geographical map representing the percentages that each province when it comes to searching TV channels videos on YouTube (_Move the mouse over a region to see the pie chat_)   
+Samira TV is also popular in Algeria's YouTube search; I also added BeIN Sports, given football's popularity. Below is a geographical map representing the percentages that each province when it comes to searching TV channels videos on YouTube   
   
   
 <script type="text/javascript"> trends.embed.renderExploreWidget("GEO_MAP", {"comparisonItem":[{"keyword":"/g/12mb3nyc_","geo":"DZ","time":"2017-06-11 2020-07-11"},{"keyword":"/g/11cft_9wd","geo":"DZ","time":"2017-06-11 2020-07-11"},{"keyword":"/g/12nvpdy6s","geo":"DZ","time":"2017-06-11 2020-07-11"},{"keyword":"/m/0jkvk2z","geo":"DZ","time":"2017-06-11 2020-07-11"}],"category":0,"property":"youtube"}, {"exploreQuery":"date=2017-06-11%202020-07-11&geo=DZ&gprop=youtube&q=%2Fg%2F12mb3nyc_,%2Fg%2F11cft_9wd,%2Fg%2F12nvpdy6s,%2Fm%2F0jkvk2z","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>  
