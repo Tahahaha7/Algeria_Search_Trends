@@ -11,6 +11,9 @@ _Please don't hesitate to recommend any interesting topics to explore_
 
 ## 
 
+<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2213_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"/g/12mb3nyc_","geo":"DZ","time":"today 5-y"},{"keyword":"/g/11cft_9wd","geo":"DZ","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&geo=DZ&q=%2Fg%2F12mb3nyc_,%2Fg%2F11cft_9wd","guestPath":"https://trends.google.com:443/trends/embed/"}); </script> 
+
+
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
 ```markdown
@@ -31,7 +34,6 @@ Syntax highlighted code block
 [Link](url) and ![Image](src)
 ```
 
-<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2213_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("GEO_MAP", {"comparisonItem":[{"keyword":"/m/06l22","geo":"DZ","time":"today 5-y"},{"keyword":"/m/0hvgt","geo":"DZ","time":"today 5-y"}],"category":0,"property":"youtube"}, {"exploreQuery":"date=today%205-y&geo=DZ&gprop=youtube&q=%2Fm%2F06l22,%2Fm%2F0hvgt","guestPath":"https://trends.google.com:443/trends/embed/"}); </script> 
 
 ### Jekyll Themes
 
