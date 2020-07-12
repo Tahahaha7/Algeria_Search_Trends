@@ -3,7 +3,9 @@
 Every year, Google posts [Year in Search](https://trends.google.com/trends/yis/2019/US/), a recap of many countries' most searched topics. Unfortunately, the reports don't cover Algeria, so I decided to make a series of exciting searches that might challenge our prejudgments and maybe even inspire us. The data is compiled by Google and is publicly available through [Google Trends API](https://trends.google.com/).  
   
   
-
+![algeria](https://www.google.com/logos/doodles/2015/algeria-national-day-2015-5633522815467520.2-hp2x.jpg)  
+  
+  
 # Automobile Manufacturers [Web Search]
 The map highlights almost a perfect split between three regions of the country:
 - **North East:** the majority of provinces had **Peugeot** as the top searched car brand
