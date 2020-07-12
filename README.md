@@ -1,6 +1,6 @@
 # Introduction
 
-Every year, Google posts [Year in Search](https://trends.google.com/trends/yis/2019/US/), a recap of many countries' most searched topics. Sadly, the reports don't cover Algeria, so I decided to make a series of exciting searches that might challenge our prejudgments and maybe even inspire us. The data is compiled by Google and is publicly available through [Google Trends API](https://trends.google.com/).  
+Every year, Google posts [Year in Search](https://trends.google.com/trends/yis/2019/US/), a recap of many countries' most searched topics. Unfortunately, the reports don't cover Algeria, so I decided to make a series of exciting searches that might challenge our prejudgments and maybe even inspire us. The data is compiled by Google and is publicly available through [Google Trends API](https://trends.google.com/).  
   
   
 
