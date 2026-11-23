@@ -139,12 +139,17 @@ class Trends:
             return 0, repr(e)
 
     def _json(self, path, params):
-        status, body = self._get(BASE + "/api/" + path + "?" + urllib.parse.urlencode(params))
-        if status == 429:
-            raise RateLimited(path)
-        if status != 200 or "{" not in body:
-            raise Refused("%s -> %s %s" % (path, status, " ".join(body[:140].split())))
-        return json.loads(body[body.index("{"):])   # the body starts with a )]}' guard
+        url = BASE + "/api/" + path + "?" + urllib.parse.urlencode(params)
+        for wait in (0, 5, 20):                  # Google's servers sometimes answer 500; try again, slower
+            time.sleep(wait)
+            status, body = self._get(url)
+            if status == 429:
+                raise RateLimited(path)
+            if status == 200 and "{" in body:
+                return json.loads(body[body.index("{"):])   # the body starts with a )]}' guard
+            if status not in (0, 500, 502, 503, 504):
+                break
+        raise Refused("%s -> %s %s" % (path, status, " ".join(body[:140].split())))
 
     def explore(self, keywords, window, prop, category=0):
         items = [{"keyword": k, "geo": GEO, "time": window} for k in keywords]
