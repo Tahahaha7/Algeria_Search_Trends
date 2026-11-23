@@ -38,7 +38,8 @@ GEO = "DZ"                 # Algeria
 TIMELINE = "today 5-y"     # weekly points, five years
 RECENT = "today 12-m"      # window for the province map and rising searches
 TOP_N = 5
-PAUSE = 1.5                # seconds between requests
+PAUSE = 6.0                # seconds between requests; Google throttles faster callers
+SLOW_DOWN_WAIT = 120       # seconds to sit out when Google says slow down (up to three times a run)
 MAX_NEW_LOOKUPS = 8        # rising searches checked for new names, per section per run
 
 SECTIONS = {
@@ -127,6 +128,7 @@ class Trends:
         jar = http.cookiejar.CookieJar()
         self.opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar))
         self.calls = 0
+        self.waits = 0
         self._get(BASE + "/?geo=" + GEO)   # a plain visit first, as a browser would make
 
     def _get(self, url):
@@ -145,6 +147,11 @@ class Trends:
         for wait in (0, 5, 20):                  # Google's servers sometimes answer 500; try again, slower
             time.sleep(wait)
             status, body = self._get(url)
+            if status == 429 and self.waits < 3:
+                self.waits += 1
+                print("    Google asked to slow down; waiting %d seconds" % SLOW_DOWN_WAIT, flush=True)
+                time.sleep(SLOW_DOWN_WAIT)
+                status, body = self._get(url)
             if status == 429:
                 raise RateLimited(path)
             if status == 200 and "{" in body:
@@ -391,6 +398,8 @@ def refresh(trends, cfg, saved, log, remember):
     if not pool:
         raise Refused("none of the seed names were recognised")
 
+    if not cfg.get("fixed"):
+        log("    ranking %d names, one request every %d seconds; this takes a few minutes" % (len(pool), PAUSE))
     ranked = pool if cfg.get("fixed") else rank(trends, pool, prop)
     top = ranked[:TOP_N]
 
