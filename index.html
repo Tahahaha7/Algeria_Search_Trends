@@ -468,5 +468,127 @@ h2 {
   <p>Visit: <a href="https://github.com/Tahahaha7">https://github.com/Tahahaha7</a></p>
 </footer>
 
+<script>
+/* Google Trends charts.
+   Each <figure class="chart"> describes one chart in its data- attributes:
+     data-type      TIMESERIES (line chart) or GEO_MAP (map by province)
+     data-time      "YYYY-MM-DD YYYY-MM-DD", or a rolling window such as "today 5-y"
+     data-property  "" for web search, "youtube" for YouTube search
+     data-keywords  Google Trends topic ids or plain terms, separated by |
+   To change or add a chart, edit those attributes. Nothing below needs touching. */
+(function () {
+  var LOADER  = 'https://ssl.gstatic.com/trends_nrtr/4116_RC01/embed_loader.js';
+  var EMBED   = 'https://trends.google.com:443/trends/embed/';
+  var EXPLORE = 'https://trends.google.com/trends/explore?';
+  var GEO     = 'DZ';
+
+  function read(fig) {
+    var d = fig.dataset;
+    return {
+      type: d.type,
+      time: d.time,
+      property: d.property || '',
+      keywords: d.keywords.split('|')
+    };
+  }
+
+  function request(c) {
+    return {
+      comparisonItem: c.keywords.map(function (k) {
+        return { keyword: k, geo: GEO, time: c.time };
+      }),
+      category: 0,
+      property: c.property
+    };
+  }
+
+  function exploreQuery(c) {
+    return 'date=' + encodeURIComponent(c.time) +
+           '&geo=' + GEO +
+           (c.property ? '&gprop=' + encodeURIComponent(c.property) : '') +
+           '&q=' + c.keywords.map(encodeURIComponent).join(',');
+  }
+
+  function monthYear(iso) {
+    return new Date(iso + 'T00:00:00Z')
+      .toLocaleDateString('en', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+  }
+
+  function caption(c) {
+    var what = c.type === 'GEO_MAP' ? 'Search interest by province' : 'Search interest over time';
+    var where = c.property === 'youtube' ? 'YouTube search' : 'Web search';
+    var range = /^(\d{4}-\d{2}-\d{2}) (\d{4}-\d{2}-\d{2})$/.exec(c.time);
+    var when = range ? ', ' + monthYear(range[1]) + ' to ' + monthYear(range[2]) : '';
+    return what + '. ' + where + when + '.';
+  }
+
+  var figures = Array.prototype.slice.call(document.querySelectorAll('.chart'));
+
+  figures.forEach(function (fig) {
+    var c = read(fig);
+    fig.querySelector('.chart__text').textContent = caption(c);
+    fig.querySelector('.chart__link').href = EXPLORE + exploreQuery(c);
+  });
+
+  /* Load Google's embed loader once. If it cannot be loaded, the charts are
+     embedded as plain iframes pointing at the same Google Trends view. */
+  var loader = new Promise(function (resolve) {
+    var s = document.createElement('script');
+    s.src = LOADER;
+    s.async = true;
+    s.onload = function () {
+      resolve(!!(window.trends && window.trends.embed && window.trends.embed.renderExploreWidgetTo));
+    };
+    s.onerror = function () { resolve(false); };
+    setTimeout(function () { resolve(false); }, 6000);
+    document.head.appendChild(s);
+  });
+
+  function plainIframe(frame, c) {
+    var iframe = document.createElement('iframe');
+    iframe.src = EMBED + 'explore/' + c.type +
+      '?req=' + encodeURIComponent(JSON.stringify(request(c))) +
+      '&tz=' + new Date().getTimezoneOffset() +
+      '&eq=' + encodeURIComponent(exploreQuery(c));
+    frame.appendChild(iframe);
+  }
+
+  function draw(fig, useLoader) {
+    var c = read(fig);
+    var frame = fig.querySelector('.chart__frame');
+    if (useLoader) {
+      try {
+        window.trends.embed.renderExploreWidgetTo(frame, c.type, request(c), {
+          exploreQuery: exploreQuery(c),
+          guestPath: EMBED
+        });
+      } catch (err) {
+        frame.textContent = '';
+        plainIframe(frame, c);
+      }
+    } else {
+      plainIframe(frame, c);
+    }
+    var iframe = frame.querySelector('iframe');
+    if (iframe) iframe.title = caption(c);
+  }
+
+  /* Charts load as they approach the viewport, rather than all at once. */
+  loader.then(function (useLoader) {
+    if (!('IntersectionObserver' in window)) {
+      figures.forEach(function (fig) { draw(fig, useLoader); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        io.unobserve(entry.target);
+        draw(entry.target, useLoader);
+      });
+    }, { rootMargin: '500px 0px' });
+    figures.forEach(function (fig) { io.observe(fig); });
+  });
+})();
+</script>
 </body>
 </html>
