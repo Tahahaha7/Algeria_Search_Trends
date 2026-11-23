@@ -1,0 +1,172 @@
+{
+ "cars": {
+  "entries": [
+   {
+    "seed": "Renault",
+    "name": "Renault",
+    "keyword": "/m/0h5wr7c",
+    "kind": "Car make"
+   },
+   {
+    "seed": "Peugeot",
+    "name": "Peugeot",
+    "keyword": "/m/0h5zkkt",
+    "kind": "Automobile make"
+   },
+   {
+    "seed": "Fiat",
+    "name": "FIAT",
+    "keyword": "/m/0h5x8qk",
+    "kind": "Automobile make"
+   },
+   {
+    "seed": "Citroën",
+    "name": "Citroën",
+    "keyword": "/m/0h5_4x9",
+    "kind": "Automobile make"
+   },
+   {
+    "seed": "Dacia",
+    "name": "Automobile Dacia",
+    "keyword": "/m/01qb4k",
+    "kind": "Car manufacturer"
+   },
+   {
+    "seed": "Volkswagen",
+    "name": "Volkswagen",
+    "keyword": "/m/0h5wtyy",
+    "kind": "Car make"
+   },
+   {
+    "seed": "Toyota",
+    "name": "Toyota",
+    "keyword": "/m/0h5y1j0",
+    "kind": "Car make"
+   },
+   {
+    "seed": "Hyundai",
+    "name": "Hyundai",
+    "keyword": "/m/0h5wp8d",
+    "kind": "Car make"
+   },
+   {
+    "seed": "Kia",
+    "name": "Kia",
+    "keyword": "/m/0h5xl4x",
+    "kind": "Car make"
+   },
+   {
+    "seed": "Suzuki",
+    "name": "Suzuki",
+    "keyword": "/m/02ws0w",
+    "kind": "Automobile company"
+   },
+   {
+    "seed": "Nissan",
+    "name": "Nissan",
+    "keyword": "/m/02nbfq4",
+    "kind": "Automobile make"
+   },
+   {
+    "seed": "Chery",
+    "name": "Chery",
+    "keyword": "/m/04wqw6",
+    "kind": "Automobile manufacturer"
+   },
+   {
+    "seed": "Geely",
+    "name": "Geely",
+    "keyword": "/m/03l8z2",
+    "kind": "Automotive company"
+   },
+   {
+    "seed": "Mercedes-Benz",
+    "name": "Mercedes-Benz",
+    "keyword": "/m/0h5wpdf",
+    "kind": "Automobile make"
+   },
+   {
+    "seed": "BMW",
+    "name": "BMW",
+    "keyword": "/m/0h6dlrc",
+    "kind": "Automobile make"
+   },
+   {
+    "seed": "Audi",
+    "name": "Audi",
+    "keyword": "/m/0k50",
+    "kind": "Automotive manufacturer"
+   },
+   {
+    "seed": "Opel",
+    "name": "Opel",
+    "keyword": "/m/05kzl",
+    "kind": "Automobile manufacturer"
+   },
+   {
+    "seed": "SEAT",
+    "name": "SEAT",
+    "keyword": "/m/01640z",
+    "kind": "Car manufacturer"
+   },
+   {
+    "seed": "Škoda",
+    "name": "Škoda",
+    "keyword": "/m/0h5z3wt",
+    "kind": "Car make"
+   },
+   {
+    "seed": "Ford",
+    "name": "Ford Motor Company",
+    "keyword": "/m/02zs4",
+    "kind": "Automobile manufacturer"
+   },
+   {
+    "seed": "JAC Motors",
+    "name": "JAC Group",
+    "keyword": "/m/04f04g2",
+    "kind": "Automobile company"
+   },
+   {
+    "seed": "MG Motor",
+    "name": "MG",
+    "keyword": "/m/017bsd",
+    "kind": "Automotive marque"
+   },
+   {
+    "seed": "BYD",
+    "name": "BYD Auto",
+    "keyword": "/m/053dyg",
+    "kind": "Automotive company"
+   },
+   {
+    "seed": "DFSK",
+    "name": "DFSK",
+    "keyword": "/g/11ghtd3bcm",
+    "kind": "Automobile company"
+   },
+   {
+    "seed": "Great Wall Motor",
+    "name": "Great Wall Motor",
+    "keyword": "/m/097z9j",
+    "kind": "Automobile manufacturer"
+   },
+   {
+    "seed": "Mitsubishi Motors",
+    "name": "Mitsubishi Motors",
+    "keyword": "/m/01cylx",
+    "kind": "Automobile manufacturer"
+   }
+  ],
+  "checked": {
+   "ماجد سبورت": null,
+   "bayern – bodø/glimt": null,
+   "ماشية": null,
+   "coupe de monde": null,
+   "جيمني": null,
+   "kimi ai": null,
+   "kimi": null,
+   "فيات باندا": null
+  }
+ }
+}
