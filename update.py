@@ -231,30 +231,43 @@ def pick_topic(topics, kinds, wanted=None):
     return fits[0] if fits else None
 
 
-def build_pool(trends, cfg, saved, log):
+def build_pool(trends, cfg, saved, log, remember):
     """Seeds resolved to Google topics, plus names discovered on earlier runs."""
     pool, known = [], {e["seed"]: e for e in saved if e.get("seed")}
-    for seed in cfg["seeds"]:
-        if isinstance(seed, (list, tuple)):
-            pool.append({"seed": seed[0], "name": seed[0], "keyword": seed[1], "kind": "pinned"})
-            continue
-        old = known.get(seed)
-        if old and (old["keyword"] or not older_than(old.get("checked"), 30)):
-            pool.append(old)       # resolved before, or looked up recently without luck
-            continue
-        topics = trends.suggest(seed)
-        topic = pick_topic(topics, cfg["kinds"], seed)
-        if topic:
-            entry = {"seed": seed, "name": topic["title"], "keyword": topic["mid"], "kind": topic["type"]}
-        elif cfg.get("plain_terms"):
-            entry = {"seed": seed, "name": seed, "keyword": seed, "kind": "search term"}
-        else:
-            entry = {"seed": seed, "name": seed, "keyword": None, "kind": "not found", "checked": today()}
-        log("    %-20s -> %s [%s]" % (seed, entry["name"], entry["kind"]))
-        if not topic:
-            for t in topics[:3]:
-                log("    %-20s    Google offered: %s [%s]" % ("", t.get("title"), t.get("type")))
-        pool.append(entry)
+    failures = 0
+    try:
+        for seed in cfg["seeds"]:
+            if isinstance(seed, (list, tuple)):
+                pool.append({"seed": seed[0], "name": seed[0], "keyword": seed[1], "kind": "pinned"})
+                continue
+            old = known.get(seed)
+            if old and (old["keyword"] or not older_than(old.get("checked"), 30)):
+                pool.append(old)       # resolved before, or looked up recently without luck
+                continue
+            try:
+                topics = trends.suggest(seed)
+                failures = 0
+            except Refused:
+                failures += 1
+                log("    %-20s -> look-up failed, will try again next run" % seed)
+                if failures >= 3:      # Google is not answering look-ups right now
+                    raise RateLimited("look-ups")
+                continue
+            topic = pick_topic(topics, cfg["kinds"], seed)
+            if topic:
+                entry = {"seed": seed, "name": topic["title"], "keyword": topic["mid"], "kind": topic["type"]}
+            elif cfg.get("plain_terms"):
+                entry = {"seed": seed, "name": seed, "keyword": seed, "kind": "search term"}
+            else:
+                entry = {"seed": seed, "name": seed, "keyword": None, "kind": "not found", "checked": today()}
+            log("    %-20s -> %s [%s]" % (seed, entry["name"], entry["kind"]))
+            if not topic:
+                for t in topics[:3]:
+                    log("    %-20s    Google offered: %s [%s]" % ("", t.get("title"), t.get("type")))
+            pool.append(entry)
+    finally:                           # keep what was looked up, even if the run stops here
+        done = {e["seed"] for e in pool}
+        remember(pool + [e for e in saved if e.get("discovered") or e.get("seed") not in done])
     pool += [e for e in saved if e.get("discovered")]
     seen, unique = set(), []
     for e in pool:
@@ -356,10 +369,10 @@ def rank(trends, pool, prop):
     return ranked + remaining
 
 
-def refresh(trends, cfg, saved, log):
+def refresh(trends, cfg, saved, log, remember):
     prop = cfg["property"]
     checked = dict(saved.get("checked") or {})
-    pool = build_pool(trends, cfg, saved.get("entries") or [], log)
+    pool = build_pool(trends, cfg, saved.get("entries") or [], log, remember)
     unresolved = [e for e in pool if e["keyword"] is None]
     skipped = [e["seed"] for e in unresolved]
     pool = [e for e in pool if e["keyword"] is not None]
@@ -419,7 +432,10 @@ def refresh(trends, cfg, saved, log):
             if len(query.split()) > 3 or lookups >= MAX_NEW_LOOKUPS:
                 continue
             lookups += 1
-            first = (trends.suggest(query) or [None])[0]
+            try:
+                first = (trends.suggest(query) or [None])[0]
+            except Refused:
+                continue
             fits = first and re.search(discover, first.get("type", ""), re.I)
             checked[query] = {"name": first["title"], "keyword": first["mid"], "kind": first["type"]} if fits else None
         found = checked[query]
@@ -493,8 +509,12 @@ def main(argv):
         for key in wanted:
             cfg = SECTIONS[key]
             log("\n== %s" % cfg["title"])
+            def remember(entries, key=key):
+                pools.setdefault(key, {})["entries"] = entries
+                save(POOL_FILE, pools)
+
             try:
-                section, pool = refresh(trends, cfg, pools.get(key) or {}, log)
+                section, pool = refresh(trends, cfg, pools.get(key) or {}, log, remember)
             except Refused as e:
                 log("  FAILED: %s" % e)
                 failed.append(key)
@@ -510,7 +530,7 @@ def main(argv):
             report(section, log)
             done.append(key)
     except RateLimited:
-        log("\nGoogle asked to slow down (429). Finished sections are saved; run again in an hour or so.")
+        log("\nGoogle asked to slow down. Finished sections and look-ups are saved; run again in an hour or so.")
     log("\n%d requests. Updated: %s. Failed: %s. Not reached: %s." % (
         trends.calls, ", ".join(done) or "none", ", ".join(failed) or "none",
         ", ".join(k for k in wanted if k not in done and k not in failed) or "none"))
