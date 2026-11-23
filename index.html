@@ -16,6 +16,48 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Google Search Trends in Algeria">
 
+<style>
+/* ---------- Tokens ---------- */
+:root {
+  --bg: #F1F4F0;          /* chalk */
+  --surface: #FFFFFF;
+  --ink: #13251D;
+  --ink-soft: #55665E;
+  --line: #CFD9D2;
+  --green: #006233;       /* flag green: web search */
+  --green-tint: #E0ECE4;
+  --red: #D21034;         /* flag red: YouTube */
+  --red-tint: #FBE4E8;
+
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Literata", Georgia, "Times New Roman", serif;
+
+  --wrap: 66rem;
+  --measure: 40rem;
+
+  /* Chart heights. Google's loader resizes each chart to fit when it can;
+     these are the floor, so a chart is never cropped if that fails. */
+  --h-timeseries: 430px;
+  --h-map: 560px;
+}
+@media (max-width: 720px) {
+  :root { --h-map: 720px; }  /* map and region list stack on narrow screens */
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0D1813;
+    --surface: #15241D;
+    --ink: #E8EFEA;
+    --ink-soft: #9DB0A6;
+    --line: #2A3D33;
+    --green: #5ED19A;
+    --green-tint: #173326;
+    --red: #FF7A8A;
+    --red-tint: #3A1820;
+  }
+}
+
+</style>
 </head>
 
 <body>
