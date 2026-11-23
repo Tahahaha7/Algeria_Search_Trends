@@ -162,6 +162,50 @@ h1 {
 }
 @keyframes blink { 50% { opacity: 0; } }
 
+/* ---------- Chapters ---------- */
+.chapter { padding-top: clamp(3rem, 7vw, 5.5rem); scroll-margin-top: 0.5rem; }
+.chapter__head {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 0.6rem 1rem;
+  margin-bottom: 1.1rem;
+}
+h2 {
+  margin: 0;
+  font: 700 clamp(1.7rem, 1.2rem + 2vw, 2.6rem)/1.1 var(--display);
+  letter-spacing: -0.02em;
+}
+.chip {
+  font: 600 0.8125rem/1 var(--display);
+  padding: 0.45em 0.8em; border-radius: 999px;
+  white-space: nowrap;
+}
+.chip--web { background: var(--green-tint); color: var(--green); }
+.chip--yt { background: var(--red-tint); color: var(--red); }
+
+.prose > * { max-width: var(--measure); }
+.prose p { margin: 0 0 1.1em; }
+.prose ul { margin: 0 0 1.1em; padding-left: 1.2em; }
+.prose li { margin-bottom: 0.4em; }
+.prose li::marker { color: var(--green); }
+
+/* Introduction: prose beside the doodle */
+.intro { display: grid; gap: 2rem clamp(2rem, 5vw, 4rem); align-items: start; }
+@media (min-width: 860px) { .intro { grid-template-columns: minmax(0, 1fr) minmax(0, 22rem); } }
+.doodle { margin: 0; }
+.doodle img { border-radius: 1rem; border: 1px solid var(--line); background: #fff; }
+.doodle figcaption,
+.note {
+  font: 400 0.875rem/1.5 var(--display);
+  color: var(--ink-soft);
+}
+.doodle figcaption { margin-top: 0.6rem; }
+.note {
+  max-width: var(--measure);
+  margin: 1.5rem 0 0;
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--green);
+}
+
 </style>
 </head>
 
