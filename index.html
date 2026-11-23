@@ -289,6 +289,45 @@ h2 {
         </ul>
       </nav>
     </div>
+    <script>
+    /* Types the title into the search field once, then opens the suggestions. */
+    (function () {
+      var search = document.querySelector('.search');
+      var h1 = document.getElementById('title');
+      var text = h1.textContent.trim();
+      var caret = document.createElement('span');
+      caret.className = 'caret';
+      caret.setAttribute('aria-hidden', 'true');
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        h1.appendChild(caret);
+        return;
+      }
+
+      var typed = document.createElement('span');
+      var rest = document.createElement('span');
+      typed.setAttribute('aria-hidden', 'true');
+      rest.setAttribute('aria-hidden', 'true');
+      rest.className = 'untyped';
+      rest.textContent = text;
+      h1.setAttribute('aria-label', text);
+      h1.textContent = '';
+      h1.appendChild(typed);
+      h1.appendChild(caret);
+      h1.appendChild(rest);
+      search.classList.add('is-typing');
+
+      var i = 0;
+      function tick() {
+        i += 1;
+        typed.textContent = text.slice(0, i);
+        rest.textContent = text.slice(i);
+        if (i < text.length) setTimeout(tick, 30 + Math.random() * 45);
+        else search.classList.remove('is-typing');
+      }
+      setTimeout(tick, 350);
+    })();
+    </script>
   </div>
 
   <section class="chapter" id="introduction" aria-labelledby="h-intro">
