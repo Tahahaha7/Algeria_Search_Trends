@@ -46,11 +46,13 @@ SECTIONS = {
         "title": "Automobile Manufacturers",
         "property": "",            # "" is web search, "youtube" is YouTube search
         "category": 815,           # Google's "Vehicle Brands" category, for rising searches
-        "kinds": r"\b(car|automobile|automotive|vehicle) (make|manufacturer|company|brand)\b|automaker|carmaker",
+        "kinds": r"\b(car|automobile|automotive|vehicle) (make|manufacturer|company|brand|marque)\b|automaker|carmaker",
         "seeds": ["Renault", "Peugeot", "Fiat", "Citroën", "Dacia", "Volkswagen", "Toyota",
                   "Hyundai", "Kia", "Suzuki", "Nissan", "Chery", "Geely", "Mercedes-Benz",
                   "BMW", "Audi", "Opel", "SEAT", "Škoda", "Ford", "JAC Motors", "MG Motor",
                   "BYD", "DFSK", "Great Wall Motor", "Mitsubishi Motors"],
+        # tried when the plain name is not found
+        "aliases": {"Audi": "Audi AG", "Ford": "Ford Motor Company", "SEAT": "SEAT S.A.", "BYD": "BYD Auto"},
     },
     "tv": {
         "title": "Algerian TV Channels",
@@ -240,26 +242,36 @@ def build_pool(trends, cfg, saved, log, remember):
             if isinstance(seed, (list, tuple)):
                 pool.append({"seed": seed[0], "name": seed[0], "keyword": seed[1], "kind": "pinned"})
                 continue
+            alias = (cfg.get("aliases") or {}).get(seed)
+            rule = "%s|%s" % (cfg["kinds"], alias)     # a seed is looked up again when either changes
             old = known.get(seed)
-            if old and (old["keyword"] or not older_than(old.get("checked"), 30)):
+            if old and (old["keyword"] or (old.get("rule") == rule and not older_than(old.get("checked"), 30))):
                 pool.append(old)       # resolved before, or looked up recently without luck
                 continue
-            try:
-                topics = trends.suggest(seed)
-                failures = 0
-            except Refused:
+            topic, topics, answered = None, [], False
+            for text in [seed] + ([alias] if alias else []):
+                try:
+                    topics = trends.suggest(text)
+                except Refused:
+                    continue
+                answered = True
+                topic = pick_topic(topics, cfg["kinds"], text)
+                if topic:
+                    break
+            if not answered:
                 failures += 1
                 log("    %-20s -> look-up failed, will try again next run" % seed)
                 if failures >= 3:      # Google is not answering look-ups right now
                     raise RateLimited("look-ups")
                 continue
-            topic = pick_topic(topics, cfg["kinds"], seed)
+            failures = 0
             if topic:
                 entry = {"seed": seed, "name": topic["title"], "keyword": topic["mid"], "kind": topic["type"]}
             elif cfg.get("plain_terms"):
                 entry = {"seed": seed, "name": seed, "keyword": seed, "kind": "search term"}
             else:
-                entry = {"seed": seed, "name": seed, "keyword": None, "kind": "not found", "checked": today()}
+                entry = {"seed": seed, "name": seed, "keyword": None, "kind": "not found",
+                         "checked": today(), "rule": rule}
             log("    %-20s -> %s [%s]" % (seed, entry["name"], entry["kind"]))
             if not topic:
                 for t in topics[:3]:
