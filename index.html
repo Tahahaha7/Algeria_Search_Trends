@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google Search Trends in Algeria | Exploratory Data Visualization</title>
+<meta name="description" content="Exploratory Data Visualization">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#006233">
+<link rel="canonical" href="https://tahahaha7.github.io/Algeria_Search_Trends/">
+<meta property="og:title" content="Google Search Trends in Algeria">
+<meta property="og:description" content="Exploratory Data Visualization">
+<meta property="og:url" content="https://tahahaha7.github.io/Algeria_Search_Trends/">
+<meta property="og:site_name" content="Google Search Trends in Algeria">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Google Search Trends in Algeria">
+
+</head>
+
+<body>
+<a class="skip" href="#content">Skip to the content</a>
+
+<header class="top wrap">
+  <p>Exploratory Data Visualization</p>
+  <a href="https://github.com/Tahahaha7/Algeria_Search_Trends">View on GitHub</a>
+</header>
+
+<main id="content" class="wrap">
+
+  <div class="hero">
+    <div class="search">
+      <div class="search__field">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+        <h1 id="title">Google Search Trends in Algeria</h1>
+      </div>
+      <nav aria-label="Chapters">
+        <ul class="search__list">
+          <li style="--i:0"><a href="#automobile-manufacturers-web-search">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+            <span class="search__q">Automobile Manufacturers</span>
+            <span class="search__src search__src--web">Web Search</span></a></li>
+          <li style="--i:1"><a href="#algerian-tv-channels-youtube">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+            <span class="search__q">Algerian TV Channels</span>
+            <span class="search__src search__src--yt">YouTube</span></a></li>
+          <li style="--i:2"><a href="#baklava-vs-zlabia-web-search">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+            <span class="search__q">Baklava vs. Zlabia</span>
+            <span class="search__src search__src--web">Web Search</span></a></li>
+          <li style="--i:3"><a href="#football-players-youtube">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+            <span class="search__q">Football Players</span>
+            <span class="search__src search__src--yt">YouTube</span></a></li>
+          <li style="--i:4"><a href="#baccalauréat-vs-équipe-nationale">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+            <span class="search__q">Baccalauréat vs. Équipe nationale</span>
+            <span class="search__src search__src--web">Web Search</span></a></li>
+          <li style="--i:5"><a href="#soolking-vs-lalgérino-youtube">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+            <span class="search__q">Soolking vs. L’Algérino</span>
+            <span class="search__src search__src--yt">YouTube</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <section class="chapter" id="introduction" aria-labelledby="h-intro">
+    <div class="intro">
+      <div>
+        <div class="chapter__head"><h2 id="h-intro">Introduction</h2></div>
+        <div class="prose">
+          <p>Every year, Google posts <a href="https://trends.google.com/trends/yis/2019/US/">Year in Search</a>, a recap of many countries’ most searched topics. Unfortunately, the reports don’t cover Algeria, so I decided to make a series of exciting searches that might challenge our prejudgments and maybe even inspire us. The data is compiled by Google and is publicly available through <a href="https://trends.google.com/">Google Trends API</a>.</p>
+        </div>
+        <p class="note">The charts are live embeds from Google Trends and load as you scroll. If one stays blank, your browser is probably blocking Google’s embed. The link under each chart opens the same view on Google Trends.</p>
+        <noscript><p class="note">The charts need JavaScript to load.</p></noscript>
+      </div>
+      <figure class="doodle">
+        <img src="https://www.google.com/logos/doodles/2015/algeria-national-day-2015-5633522815467520.2-hp2x.jpg"
+             alt="Google Doodle for Algeria National Day 2015"
+             onerror="this.closest('figure').remove()">
+        <figcaption>Google’s Doodle for Algeria National Day, 2015.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="chapter" id="automobile-manufacturers-web-search" aria-labelledby="h-cars">
+    <div class="chapter__head">
+      <h2 id="h-cars">Automobile Manufacturers</h2>
+      <span class="chip chip--web">Web Search</span>
+    </div>
+    <div class="prose">
+      <p>The map highlights almost a perfect split between three regions of the country:</p>
+      <ul>
+        <li><strong>North East:</strong> the majority of provinces had <strong>Peugeot</strong> as the top searched car brand</li>
+        <li><strong>North West:</strong> the majority of provinces had <strong>Renault</strong> as the top searched car brand</li>
+        <li><strong>South:</strong> the majority of regions had <strong>Toyota</strong> as the top searched car brand</li>
+      </ul>
+      <p>I’m not sure about the divide between Peugeot and Renault in the North. Nevertheless, I suspect that the harsh environment in the South and maybe even the lack of reliable infrastructure led the Southern people to rely on Toyota.</p>
+    </div>
+    <figure class="chart" data-type="GEO_MAP" data-time="2015-07-12 2020-07-11" data-property=""
+            data-keywords="/m/0h5wr7c|/m/07ywl|/m/0h5y1j0|/m/05b4c|/m/0f4v1">
+      <div class="chart__frame"></div>
+      <figcaption><span class="chart__text"></span><a class="chart__link" target="_blank" rel="noopener">Open in Google Trends</a></figcaption>
+    </figure>
+  </section>
+
+  <section class="chapter" id="algerian-tv-channels-youtube" aria-labelledby="h-tv">
+    <div class="chapter__head">
+      <h2 id="h-tv">Algerian TV Channels</h2>
+      <span class="chip chip--yt">YouTube</span>
+    </div>
+    <div class="prose">
+      <p>Algeria’s media outlets witnessed a massive growth in the past decade, and two of the prominent channels are Ennahar and Echorouk. In the past five years, Ennahar TV had a clear edge over Echorouk illustrated by the graph below. The annual spikes that appear around the beginning of the summer are due to the increase of viewership during Ramadhan’s holy month since both TV networks invest heavily in new programs and shows.</p>
+    </div>
+    <figure class="chart" data-type="TIMESERIES" data-time="2015-07-12 2020-07-11" data-property=""
+            data-keywords="/g/12mb3nyc_|/g/11cft_9wd">
+      <div class="chart__frame"></div>
+      <figcaption><span class="chart__text"></span><a class="chart__link" target="_blank" rel="noopener">Open in Google Trends</a></figcaption>
+    </figure>
+    <div class="prose">
+      <p>Samira TV is also popular in Algeria’s YouTube search; I also added BeIN Sports, given football’s popularity. Below is a geographical map representing the percentages that each province when it comes to searching TV channels videos on YouTube</p>
+    </div>
+    <figure class="chart" data-type="GEO_MAP" data-time="2017-06-11 2020-07-11" data-property="youtube"
+            data-keywords="/g/12mb3nyc_|/g/11cft_9wd|/g/12nvpdy6s|/m/0jkvk2z">
+      <div class="chart__frame"></div>
+      <figcaption><span class="chart__text"></span><a class="chart__link" target="_blank" rel="noopener">Open in Google Trends</a></figcaption>
+    </figure>
+  </section>
+
+  <section class="chapter" id="baklava-vs-zlabia-web-search" aria-labelledby="h-sweets">
+    <div class="chapter__head">
+      <h2 id="h-sweets">Baklava vs. Zlabia</h2>
+      <span class="chip chip--web">Web Search</span>
+    </div>
+    <div class="prose">
+      <p>My favorite visualization not only because it concerns food, but because this pattern appears to be a nationwide phenomenon. Zlabia (Also known as Jalebi) is a delicacy that Algerians enjoy during Ramadhan’s holy month. You can notice that the search for recipes starts at the beginning of the summer. Exactly after four weeks (days before Aid celebration), Baklava dominates the search to be three times are Zlabia. I was excited to see that this pattern appeared everywhere in Algeria, Zlabia comes first then Baklava takes over by the end of the month.</p>
+    </div>
+    <figure class="chart" data-type="TIMESERIES" data-time="2015-07-12 2020-07-11" data-property=""
+            data-keywords="/m/0g07j|/m/04nyjg">
+      <div class="chart__frame"></div>
+      <figcaption><span class="chart__text"></span><a class="chart__link" target="_blank" rel="noopener">Open in Google Trends</a></figcaption>
+    </figure>
+  </section>
+
+  <section class="chapter" id="football-players-youtube" aria-labelledby="h-football">
+    <div class="chapter__head">
+      <h2 id="h-football">Football Players</h2>
+      <span class="chip chip--yt">YouTube</span>
+    </div>
+    <div class="prose">
+      <p>I remember endless disputes about the two most famous football players, and I suspect that it might be the most polarizing topic among young people in Algeria. The data has spoken based on YouTube searches for the past <strong>10 years</strong>, it looks like CR7 was always the most viewed footballer on the platform.</p>
+    </div>
+    <figure class="chart" data-type="TIMESERIES" data-time="2010-06-11 2020-07-11" data-property="youtube"
+            data-keywords="/m/06qjgc|/m/02xt6q">
+      <div class="chart__frame"></div>
+      <figcaption><span class="chart__text"></span><a class="chart__link" target="_blank" rel="noopener">Open in Google Trends</a></figcaption>
+    </figure>
+    <div class="prose">
+      <p>Riyad Mahrez stole the show after the phenomenal championship win with Leicester City back in the 2015/2016 Premier League season. For the past <strong>5 years</strong>, The vast majority of Algeria’s provinces have streamed more videos of Mahrez than of Messi or Cristiano (We do really love when a local star shines).</p>
+    </div>
+    <figure class="chart" data-type="GEO_MAP" data-time="2015-07-12 2020-07-11" data-property="youtube"
+            data-keywords="/m/06qjgc|/m/02xt6q|/m/0_1k32v">
+      <div class="chart__frame"></div>
+      <figcaption><span class="chart__text"></span><a class="chart__link" target="_blank" rel="noopener">Open in Google Trends</a></figcaption>
+    </figure>
+  </section>
+
+  <section class="chapter" id="baccalauréat-vs-équipe-nationale" aria-labelledby="h-bac">
+    <div class="chapter__head">
+      <h2 id="h-bac">Baccalauréat vs. Équipe nationale</h2>
+      <span class="chip chip--web">Web Search</span>
+    </div>
+    <div class="prose">
+      <p>The stress of finding out about the Baccalaureate results breaks the internet in Algeria; the spikes are very noticeable every beginning of summer. However, the announcement of Baccalaureat results synchronized with Algeria’s national football team’s crowning as the champions of Africa. It was interesting to witness the overlap of the two events based on people’s search topics.</p>
+    </div>
+    <figure class="chart" data-type="TIMESERIES" data-time="2017-01-01 2020-07-11" data-property=""
+            data-keywords="/m/01tc8y|/m/03_qj1">
+      <div class="chart__frame"></div>
+      <figcaption><span class="chart__text"></span><a class="chart__link" target="_blank" rel="noopener">Open in Google Trends</a></figcaption>
+    </figure>
+  </section>
+
+  <section class="chapter" id="soolking-vs-lalgérino-youtube" aria-labelledby="h-music">
+    <div class="chapter__head">
+      <h2 id="h-music">Soolking vs. L’Algérino</h2>
+      <span class="chip chip--yt">YouTube</span>
+    </div>
+    <div class="prose">
+      <p>Finally, I came across Algeria’s music scene to pick the most streamed artists in the last <strong>5 years</strong>. It seems that L’Algeriano was taken over by Soolking in a span of two years, making him the most searched artist on YouTube.</p>
+    </div>
+    <figure class="chart" data-type="TIMESERIES" data-time="2015-07-12 2020-07-11" data-property="youtube"
+            data-keywords="/m/04gvf3y|Soolking">
+      <div class="chart__frame"></div>
+      <figcaption><span class="chart__text"></span><a class="chart__link" target="_blank" rel="noopener">Open in Google Trends</a></figcaption>
+    </figure>
+  </section>
+
+</main>
+
+<footer class="foot wrap" id="contact--feedback">
+  <h2>Contact &amp; Feedback</h2>
+  <p>Visit: <a href="https://github.com/Tahahaha7">https://github.com/Tahahaha7</a></p>
+</footer>
+
+</body>
+</html>
