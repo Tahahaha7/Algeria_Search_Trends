@@ -46,8 +46,7 @@ SECTIONS = {
         "title": "Automobile Manufacturers",
         "property": "",            # "" is web search, "youtube" is YouTube search
         "category": 815,           # Google's "Vehicle Brands" category, for rising searches
-        "kinds": r"manufactur|automaker|carmaker|automotive|automobile|motor|\bcompany\b|\bbrand\b",
-        "discover": r"manufactur|automaker|carmaker|automotive company|automobile (make|brand|company)|car (brand|company)",
+        "kinds": r"\b(car|automobile|automotive|vehicle) (make|manufacturer|company|brand)\b|automaker|carmaker",
         "seeds": ["Renault", "Peugeot", "Fiat", "Citroën", "Dacia", "Volkswagen", "Toyota",
                   "Hyundai", "Kia", "Suzuki", "Nissan", "Chery", "Geely", "Mercedes-Benz",
                   "BMW", "Audi", "Opel", "SEAT", "Škoda", "Ford", "JAC Motors", "MG Motor",
