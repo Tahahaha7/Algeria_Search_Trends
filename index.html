@@ -206,6 +206,33 @@ h2 {
   border-left: 3px solid var(--green);
 }
 
+/* ---------- Charts ---------- */
+.chart { margin: 1.75rem 0 2.25rem; }
+.chart[data-type="TIMESERIES"] { --h: var(--h-timeseries); }
+.chart[data-type="GEO_MAP"] { --h: var(--h-map); }
+.chart__frame {
+  min-height: var(--h);
+  background: #fff;                 /* Google's embed is always white */
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+.chart__frame iframe {
+  display: block; width: 100%;
+  height: var(--h); min-height: var(--h);
+  border: 0;
+  box-shadow: none !important;      /* the loader adds its own shadow inline */
+  border-radius: 0 !important;
+}
+.chart figcaption {
+  display: flex; flex-wrap: wrap; justify-content: space-between;
+  gap: 0.25rem 1.5rem;
+  margin-top: 0.7rem; padding-inline: 0.25rem;
+  font: 400 0.875rem/1.5 var(--display);
+  color: var(--ink-soft);
+}
+.chart__link { font-weight: 600; white-space: nowrap; }
+
 </style>
 </head>
 
