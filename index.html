@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google Search Trends in Algeria | Exploratory Data Visualization</title>
+<meta name="description" content="Exploratory Data Visualization">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#006233">
+<link rel="canonical" href="https://tahahaha7.github.io/Algeria_Search_Trends/">
+<meta property="og:title" content="Google Search Trends in Algeria">
+<meta property="og:description" content="Exploratory Data Visualization">
+<meta property="og:url" content="https://tahahaha7.github.io/Algeria_Search_Trends/">
+<meta property="og:site_name" content="Google Search Trends in Algeria">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Google Search Trends in Algeria">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Literata:wght@400;700&display=swap">
+
+<style>
+/* ---------- Tokens ---------- */
+:root {
+  --bg: #F1F4F0;          /* chalk */
+  --surface: #FFFFFF;
+  --ink: #13251D;
+  --ink-soft: #55665E;
+  --line: #CFD9D2;
+  --green: #006233;       /* flag green: web search */
+  --green-tint: #E0ECE4;
+  --red: #D21034;         /* flag red: YouTube */
+  --red-tint: #FBE4E8;
+
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Literata", Georgia, "Times New Roman", serif;
+
+  --wrap: 66rem;
+  --measure: 40rem;
+
+  /* Chart heights. Google's loader resizes each chart to fit when it can;
+     these are the floor, so a chart is never cropped if that fails. */
+  --h-timeseries: 430px;
+  --h-map: 560px;
+}
+@media (max-width: 720px) {
+  :root { --h-map: 720px; }  /* map and region list stack on narrow screens */
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0D1813;
+    --surface: #15241D;
+    --ink: #E8EFEA;
+    --ink-soft: #9DB0A6;
+    --line: #2A3D33;
+    --green: #5ED19A;
+    --green-tint: #173326;
+    --red: #FF7A8A;
+    --red-tint: #3A1820;
+  }
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1.125rem/1.7 var(--body);
+}
+a { color: var(--green); text-underline-offset: 0.18em; text-decoration-thickness: 0.08em; }
+a:hover { text-decoration-thickness: 0.14em; }
+:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; border-radius: 4px; }
+img { max-width: 100%; height: auto; display: block; }
+
+.wrap { width: min(100% - 2.5rem, var(--wrap)); margin-inline: auto; }
+
+.skip {
+  position: absolute; left: 1rem; top: -4rem;
+  background: var(--surface); padding: 0.5rem 0.9rem; border-radius: 0.5rem;
+  font: 600 0.9375rem var(--display);
+}
+.skip:focus { top: 1rem; }
+
+/* ---------- Top strip ---------- */
+.top {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 1rem; flex-wrap: wrap;
+  padding-block: 1.25rem;
+  font: 400 0.9375rem/1.4 var(--display);
+  color: var(--ink-soft);
+}
+.top p { margin: 0; }
+.top a { font-weight: 600; }
+
+/* ---------- Hero: the title is the query, the chapters are its suggestions ---------- */
+.hero { padding-top: clamp(1.5rem, 5vw, 3.5rem); }
+
+.search {
+  background: var(--surface);
+  border: 2px solid var(--green);
+  border-radius: clamp(1.25rem, 3vw, 2rem);
+  overflow: hidden;
+}
+.search__field {
+  display: flex; align-items: flex-start;
+  gap: clamp(0.7rem, 1.6vw, 1.1rem);
+  padding: clamp(1.1rem, 2.8vw, 1.9rem) clamp(1.1rem, 3vw, 2.25rem);
+}
+.search__field svg {
+  flex: none;
+  width: clamp(1.5rem, 1rem + 2vw, 2.5rem); height: auto;
+  margin-top: 0.22em;
+  color: var(--green);
+}
+h1 {
+  margin: 0;
+  font: 700 clamp(1.9rem, 1rem + 3.6vw, 3.4rem)/1.08 var(--display);
+  letter-spacing: -0.025em;
+}
+.untyped { visibility: hidden; }
+.caret { position: relative; }
+.caret::after {
+  content: ""; position: absolute;
+  left: 0.05em; bottom: 0.02em;
+  width: 0.07em; height: 0.92em;
+  background: var(--red); border-radius: 1px;
+}
+
+.search__list {
+  list-style: none; margin: 0;
+  padding: 0.5rem;
+  border-top: 1px solid var(--line);
+}
+.search__list a {
+  display: flex; align-items: center; gap: 0.9rem;
+  padding: 0.7rem clamp(0.6rem, 2vw, 1.6rem);
+  border-radius: 0.9rem;
+  color: var(--ink); text-decoration: none;
+  font: 400 1.125rem/1.3 var(--display);
+}
+.search__list a:hover,
+.search__list a:focus-visible { background: var(--green-tint); }
+.search__list svg { flex: none; width: 1.05rem; height: auto; color: var(--ink-soft); }
+.search__q { flex: 1; text-transform: lowercase; }
+.search__src { font-size: 0.8125rem; font-weight: 600; white-space: nowrap; }
+.search__src--web { color: var(--green); }
+.search__src--yt { color: var(--red); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .caret::after { animation: blink 1.2s steps(1) 8; }
+  .search__list li {
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition-delay: calc(var(--i, 0) * 55ms);
+  }
+  .search.is-typing .search__list li {
+    opacity: 0; transform: translateY(-0.4rem); transition: none;
+  }
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---------- Chapters ---------- */
+.chapter { padding-top: clamp(3rem, 7vw, 5.5rem); scroll-margin-top: 0.5rem; }
+.chapter__head {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 0.6rem 1rem;
+  margin-bottom: 1.1rem;
+}
+h2 {
+  margin: 0;
+  font: 700 clamp(1.7rem, 1.2rem + 2vw, 2.6rem)/1.1 var(--display);
+  letter-spacing: -0.02em;
+}
+.chip {
+  font: 600 0.8125rem/1 var(--display);
+  padding: 0.45em 0.8em; border-radius: 999px;
+  white-space: nowrap;
+}
+.chip--web { background: var(--green-tint); color: var(--green); }
+.chip--yt { background: var(--red-tint); color: var(--red); }
+
+.prose > * { max-width: var(--measure); }
+.prose p { margin: 0 0 1.1em; }
+.prose ul { margin: 0 0 1.1em; padding-left: 1.2em; }
+.prose li { margin-bottom: 0.4em; }
+.prose li::marker { color: var(--green); }
+
+/* Introduction: prose beside the doodle */
+.intro { display: grid; gap: 2rem clamp(2rem, 5vw, 4rem); align-items: start; }
+@media (min-width: 860px) { .intro { grid-template-columns: minmax(0, 1fr) minmax(0, 22rem); } }
+.doodle { margin: 0; }
+.doodle img { border-radius: 1rem; border: 1px solid var(--line); background: #fff; }
+.doodle figcaption,
+.note {
+  font: 400 0.875rem/1.5 var(--display);
+  color: var(--ink-soft);
+}
+.doodle figcaption { margin-top: 0.6rem; }
+.note {
+  max-width: var(--measure);
+  margin: 1.5rem 0 0;
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--green);
+}
+
+/* ---------- Charts ---------- */
+.chart { margin: 1.75rem 0 2.25rem; }
+.chart[data-type="TIMESERIES"] { --h: var(--h-timeseries); }
+.chart[data-type="GEO_MAP"] { --h: var(--h-map); }
+.chart__frame {
+  min-height: var(--h);
+  background: #fff;                 /* Google's embed is always white */
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+.chart__frame iframe {
+  display: block; width: 100%;
+  height: var(--h); min-height: var(--h);
+  border: 0;
+  box-shadow: none !important;      /* the loader adds its own shadow inline */
+  border-radius: 0 !important;
+}
+.chart figcaption {
+  display: flex; flex-wrap: wrap; justify-content: space-between;
+  gap: 0.25rem 1.5rem;
+  margin-top: 0.7rem; padding-inline: 0.25rem;
+  font: 400 0.875rem/1.5 var(--display);
+  color: var(--ink-soft);
+}
+.chart__link { font-weight: 600; white-space: nowrap; }
+
+/* ---------- Footer ---------- */
+.foot {
+  margin-top: clamp(3.5rem, 8vw, 6rem);
+  padding-block: 2rem 3.5rem;
+  border-top: 1px solid var(--line);
+}
+.foot h2 { font-size: 1.375rem; margin-bottom: 0.4rem; }
+.foot p { margin: 0; font: 400 1rem/1.6 var(--display); overflow-wrap: anywhere; }
+</style>
+</head>
+
+<body>
+<a class="skip" href="#content">Skip to the content</a>
+
+<header class="top wrap">
+  <p>Exploratory Data Visualization</p>
+  <a href="https://github.com/Tahahaha7/Algeria_Search_Trends">View on GitHub</a>
+</header>
+
+<main id="content" class="wrap">
+
+  <div class="hero">
+    <div class="search">
+      <div class="search__field">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+        <h1 id="title">Google Search Trends in Algeria</h1>
+      </div>
+      <nav aria-label="Chapters">
+        <ul class="search__list">
+          <li style="--i:0"><a href="#automobile-manufacturers-web-search">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+            <span class="search__q">Automobile Manufacturers</span>
+            <span class="search__src search__src--web">Web Search</span></a></li>
+          <li style="--i:1"><a href="#algerian-tv-channels-youtube">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+            <span class="search__q">Algerian TV Channels</span>
+            <span class="search__src search__src--yt">YouTube</span></a></li>
+          <li style="--i:2"><a href="#baklava-vs-zlabia-web-search">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+            <span class="search__q">Baklava vs. Zlabia</span>
+            <span class="search__src search__src--web">Web Search</span></a></li>
+          <li style="--i:3"><a href="#football-players-youtube">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+            <span class="search__q">Football Players</span>
+            <span class="search__src search__src--yt">YouTube</span></a></li>
+          <li style="--i:4"><a href="#baccalauréat-vs-équipe-nationale">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+            <span class="search__q">Baccalauréat vs. Équipe nationale</span>
+            <span class="search__src search__src--web">Web Search</span></a></li>
+          <li style="--i:5"><a href="#soolking-vs-lalgérino-youtube">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+            <span class="search__q">Soolking vs. L’Algérino</span>
+            <span class="search__src search__src--yt">YouTube</span></a></li>
+        </ul>
+      </nav>
+    </div>
+    <script>
+    /* Types the title into the search field once, then opens the suggestions. */
+    (function () {
+      var search = document.querySelector('.search');
+      var h1 = document.getElementById('title');
+      var text = h1.textContent.trim();
+      var caret = document.createElement('span');
+      caret.className = 'caret';
+      caret.setAttribute('aria-hidden', 'true');
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        h1.appendChild(caret);
+        return;
+      }
+
+      var typed = document.createElement('span');
+      var rest = document.createElement('span');
+      typed.setAttribute('aria-hidden', 'true');
+      rest.setAttribute('aria-hidden', 'true');
+      rest.className = 'untyped';
+      rest.textContent = text;
+      h1.setAttribute('aria-label', text);
+      h1.textContent = '';
+      h1.appendChild(typed);
+      h1.appendChild(caret);
+      h1.appendChild(rest);
+      search.classList.add('is-typing');
+
+      var i = 0;
+      function tick() {
+        i += 1;
+        typed.textContent = text.slice(0, i);
+        rest.textContent = text.slice(i);
+        if (i < text.length) setTimeout(tick, 30 + Math.random() * 45);
+        else search.classList.remove('is-typing');
+      }
+      setTimeout(tick, 350);
+    })();
+    </script>
+  </div>
+
+  <section class="chapter" id="introduction" aria-labelledby="h-intro">
+    <div class="intro">
+      <div>
+        <div class="chapter__head"><h2 id="h-intro">Introduction</h2></div>
+        <div class="prose">
+          <p>Every year, Google posts <a href="https://trends.google.com/trends/yis/2019/US/">Year in Search</a>, a recap of many countries’ most searched topics. Unfortunately, the reports don’t cover Algeria, so I decided to make a series of exciting searches that might challenge our prejudgments and maybe even inspire us. The data is compiled by Google and is publicly available through <a href="https://trends.google.com/">Google Trends API</a>.</p>
+        </div>
+        <p class="note">The charts are live embeds from Google Trends and load as you scroll. If one stays blank, your browser is probably blocking Google’s embed. The link under each chart opens the same view on Google Trends.</p>
+        <noscript><p class="note">The charts need JavaScript to load.</p></noscript>
+      </div>
+      <figure class="doodle">
+        <img src="https://www.google.com/logos/doodles/2015/algeria-national-day-2015-5633522815467520.2-hp2x.jpg"
+             alt="Google Doodle for Algeria National Day 2015"
+             onerror="this.closest('figure').remove()">
+        <figcaption>Google’s Doodle for Algeria National Day, 2015.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="chapter" id="automobile-manufacturers-web-search" aria-labelledby="h-cars">
+    <div class="chapter__head">
+      <h2 id="h-cars">Automobile Manufacturers</h2>
+      <span class="chip chip--web">Web Search</span>
+    </div>
+    <div class="prose">
+      <p>The map highlights almost a perfect split between three regions of the country:</p>
+      <ul>
+        <li><strong>North East:</strong> the majority of provinces had <strong>Peugeot</strong> as the top searched car brand</li>
+        <li><strong>North West:</strong> the majority of provinces had <strong>Renault</strong> as the top searched car brand</li>
+        <li><strong>South:</strong> the majority of regions had <strong>Toyota</strong> as the top searched car brand</li>
+      </ul>
+      <p>I’m not sure about the divide between Peugeot and Renault in the North. Nevertheless, I suspect that the harsh environment in the South and maybe even the lack of reliable infrastructure led the Southern people to rely on Toyota.</p>
+    </div>
+    <figure class="chart" data-type="GEO_MAP" data-time="2015-07-12 2020-07-11" data-property=""
+            data-keywords="/m/0h5wr7c|/m/07ywl|/m/0h5y1j0|/m/05b4c|/m/0f4v1">
+      <div class="chart__frame"></div>
+      <figcaption><span class="chart__text"></span><a class="chart__link" target="_blank" rel="noopener">Open in Google Trends</a></figcaption>
+    </figure>
+  </section>
+
+  <section class="chapter" id="algerian-tv-channels-youtube" aria-labelledby="h-tv">
+    <div class="chapter__head">
+      <h2 id="h-tv">Algerian TV Channels</h2>
+      <span class="chip chip--yt">YouTube</span>
+    </div>
+    <div class="prose">
+      <p>Algeria’s media outlets witnessed a massive growth in the past decade, and two of the prominent channels are Ennahar and Echorouk. In the past five years, Ennahar TV had a clear edge over Echorouk illustrated by the graph below. The annual spikes that appear around the beginning of the summer are due to the increase of viewership during Ramadhan’s holy month since both TV networks invest heavily in new programs and shows.</p>
+    </div>
+    <figure class="chart" data-type="TIMESERIES" data-time="2015-07-12 2020-07-11" data-property=""
+            data-keywords="/g/12mb3nyc_|/g/11cft_9wd">
+      <div class="chart__frame"></div>
+      <figcaption><span class="chart__text"></span><a class="chart__link" target="_blank" rel="noopener">Open in Google Trends</a></figcaption>
+    </figure>
+    <div class="prose">
+      <p>Samira TV is also popular in Algeria’s YouTube search; I also added BeIN Sports, given football’s popularity. Below is a geographical map representing the percentages that each province when it comes to searching TV channels videos on YouTube</p>
+    </div>
+    <figure class="chart" data-type="GEO_MAP" data-time="2017-06-11 2020-07-11" data-property="youtube"
+            data-keywords="/g/12mb3nyc_|/g/11cft_9wd|/g/12nvpdy6s|/m/0jkvk2z">
+      <div class="chart__frame"></div>
+      <figcaption><span class="chart__text"></span><a class="chart__link" target="_blank" rel="noopener">Open in Google Trends</a></figcaption>
+    </figure>
+  </section>
+
+  <section class="chapter" id="baklava-vs-zlabia-web-search" aria-labelledby="h-sweets">
+    <div class="chapter__head">
+      <h2 id="h-sweets">Baklava vs. Zlabia</h2>
+      <span class="chip chip--web">Web Search</span>
+    </div>
+    <div class="prose">
+      <p>My favorite visualization not only because it concerns food, but because this pattern appears to be a nationwide phenomenon. Zlabia (Also known as Jalebi) is a delicacy that Algerians enjoy during Ramadhan’s holy month. You can notice that the search for recipes starts at the beginning of the summer. Exactly after four weeks (days before Aid celebration), Baklava dominates the search to be three times are Zlabia. I was excited to see that this pattern appeared everywhere in Algeria, Zlabia comes first then Baklava takes over by the end of the month.</p>
+    </div>
+    <figure class="chart" data-type="TIMESERIES" data-time="2015-07-12 2020-07-11" data-property=""
+            data-keywords="/m/0g07j|/m/04nyjg">
+      <div class="chart__frame"></div>
+      <figcaption><span class="chart__text"></span><a class="chart__link" target="_blank" rel="noopener">Open in Google Trends</a></figcaption>
+    </figure>
+  </section>
+
+  <section class="chapter" id="football-players-youtube" aria-labelledby="h-football">
+    <div class="chapter__head">
+      <h2 id="h-football">Football Players</h2>
+      <span class="chip chip--yt">YouTube</span>
+    </div>
+    <div class="prose">
+      <p>I remember endless disputes about the two most famous football players, and I suspect that it might be the most polarizing topic among young people in Algeria. The data has spoken based on YouTube searches for the past <strong>10 years</strong>, it looks like CR7 was always the most viewed footballer on the platform.</p>
+    </div>
+    <figure class="chart" data-type="TIMESERIES" data-time="2010-06-11 2020-07-11" data-property="youtube"
+            data-keywords="/m/06qjgc|/m/02xt6q">
+      <div class="chart__frame"></div>
+      <figcaption><span class="chart__text"></span><a class="chart__link" target="_blank" rel="noopener">Open in Google Trends</a></figcaption>
+    </figure>
+    <div class="prose">
+      <p>Riyad Mahrez stole the show after the phenomenal championship win with Leicester City back in the 2015/2016 Premier League season. For the past <strong>5 years</strong>, The vast majority of Algeria’s provinces have streamed more videos of Mahrez than of Messi or Cristiano (We do really love when a local star shines).</p>
+    </div>
+    <figure class="chart" data-type="GEO_MAP" data-time="2015-07-12 2020-07-11" data-property="youtube"
+            data-keywords="/m/06qjgc|/m/02xt6q|/m/0_1k32v">
+      <div class="chart__frame"></div>
+      <figcaption><span class="chart__text"></span><a class="chart__link" target="_blank" rel="noopener">Open in Google Trends</a></figcaption>
+    </figure>
+  </section>
+
+  <section class="chapter" id="baccalauréat-vs-équipe-nationale" aria-labelledby="h-bac">
+    <div class="chapter__head">
+      <h2 id="h-bac">Baccalauréat vs. Équipe nationale</h2>
+      <span class="chip chip--web">Web Search</span>
+    </div>
+    <div class="prose">
+      <p>The stress of finding out about the Baccalaureate results breaks the internet in Algeria; the spikes are very noticeable every beginning of summer. However, the announcement of Baccalaureat results synchronized with Algeria’s national football team’s crowning as the champions of Africa. It was interesting to witness the overlap of the two events based on people’s search topics.</p>
+    </div>
+    <figure class="chart" data-type="TIMESERIES" data-time="2017-01-01 2020-07-11" data-property=""
+            data-keywords="/m/01tc8y|/m/03_qj1">
+      <div class="chart__frame"></div>
+      <figcaption><span class="chart__text"></span><a class="chart__link" target="_blank" rel="noopener">Open in Google Trends</a></figcaption>
+    </figure>
+  </section>
+
+  <section class="chapter" id="soolking-vs-lalgérino-youtube" aria-labelledby="h-music">
+    <div class="chapter__head">
+      <h2 id="h-music">Soolking vs. L’Algérino</h2>
+      <span class="chip chip--yt">YouTube</span>
+    </div>
+    <div class="prose">
+      <p>Finally, I came across Algeria’s music scene to pick the most streamed artists in the last <strong>5 years</strong>. It seems that L’Algeriano was taken over by Soolking in a span of two years, making him the most searched artist on YouTube.</p>
+    </div>
+    <figure class="chart" data-type="TIMESERIES" data-time="2015-07-12 2020-07-11" data-property="youtube"
+            data-keywords="/m/04gvf3y|Soolking">
+      <div class="chart__frame"></div>
+      <figcaption><span class="chart__text"></span><a class="chart__link" target="_blank" rel="noopener">Open in Google Trends</a></figcaption>
+    </figure>
+  </section>
+
+</main>
+
+<footer class="foot wrap" id="contact--feedback">
+  <h2>Contact &amp; Feedback</h2>
+  <p>Visit: <a href="https://github.com/Tahahaha7">https://github.com/Tahahaha7</a></p>
+</footer>
+
+<script>
+/* Google Trends charts.
+   Each <figure class="chart"> describes one chart in its data- attributes:
+     data-type      TIMESERIES (line chart) or GEO_MAP (map by province)
+     data-time      "YYYY-MM-DD YYYY-MM-DD", or a rolling window such as "today 5-y"
+     data-property  "" for web search, "youtube" for YouTube search
+     data-keywords  Google Trends topic ids or plain terms, separated by |
+   To change or add a chart, edit those attributes. Nothing below needs touching. */
+(function () {
+  var LOADER  = 'https://ssl.gstatic.com/trends_nrtr/4116_RC01/embed_loader.js';
+  var EMBED   = 'https://trends.google.com:443/trends/embed/';
+  var EXPLORE = 'https://trends.google.com/trends/explore?';
+  var GEO     = 'DZ';
+
+  function read(fig) {
+    var d = fig.dataset;
+    return {
+      type: d.type,
+      time: d.time,
+      property: d.property || '',
+      keywords: d.keywords.split('|')
+    };
+  }
+
+  function request(c) {
+    return {
+      comparisonItem: c.keywords.map(function (k) {
+        return { keyword: k, geo: GEO, time: c.time };
+      }),
+      category: 0,
+      property: c.property
+    };
+  }
+
+  function exploreQuery(c) {
+    return 'date=' + encodeURIComponent(c.time) +
+           '&geo=' + GEO +
+           (c.property ? '&gprop=' + encodeURIComponent(c.property) : '') +
+           '&q=' + c.keywords.map(encodeURIComponent).join(',');
+  }
+
+  function monthYear(iso) {
+    return new Date(iso + 'T00:00:00Z')
+      .toLocaleDateString('en', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+  }
+
+  function caption(c) {
+    var what = c.type === 'GEO_MAP' ? 'Search interest by province' : 'Search interest over time';
+    var where = c.property === 'youtube' ? 'YouTube search' : 'Web search';
+    var range = /^(\d{4}-\d{2}-\d{2}) (\d{4}-\d{2}-\d{2})$/.exec(c.time);
+    var when = range ? ', ' + monthYear(range[1]) + ' to ' + monthYear(range[2]) : '';
+    return what + '. ' + where + when + '.';
+  }
+
+  var figures = Array.prototype.slice.call(document.querySelectorAll('.chart'));
+
+  figures.forEach(function (fig) {
+    var c = read(fig);
+    fig.querySelector('.chart__text').textContent = caption(c);
+    fig.querySelector('.chart__link').href = EXPLORE + exploreQuery(c);
+  });
+
+  /* Load Google's embed loader once. If it cannot be loaded, the charts are
+     embedded as plain iframes pointing at the same Google Trends view. */
+  var loader = new Promise(function (resolve) {
+    var s = document.createElement('script');
+    s.src = LOADER;
+    s.async = true;
+    s.onload = function () {
+      resolve(!!(window.trends && window.trends.embed && window.trends.embed.renderExploreWidgetTo));
+    };
+    s.onerror = function () { resolve(false); };
+    setTimeout(function () { resolve(false); }, 6000);
+    document.head.appendChild(s);
+  });
+
+  function plainIframe(frame, c) {
+    var iframe = document.createElement('iframe');
+    iframe.src = EMBED + 'explore/' + c.type +
+      '?req=' + encodeURIComponent(JSON.stringify(request(c))) +
+      '&tz=' + new Date().getTimezoneOffset() +
+      '&eq=' + encodeURIComponent(exploreQuery(c));
+    frame.appendChild(iframe);
+  }
+
+  function draw(fig, useLoader) {
+    var c = read(fig);
+    var frame = fig.querySelector('.chart__frame');
+    if (useLoader) {
+      try {
+        window.trends.embed.renderExploreWidgetTo(frame, c.type, request(c), {
+          exploreQuery: exploreQuery(c),
+          guestPath: EMBED
+        });
+      } catch (err) {
+        frame.textContent = '';
+        plainIframe(frame, c);
+      }
+    } else {
+      plainIframe(frame, c);
+    }
+    var iframe = frame.querySelector('iframe');
+    if (iframe) iframe.title = caption(c);
+  }
+
+  /* Charts load as they approach the viewport, rather than all at once. */
+  loader.then(function (useLoader) {
+    if (!('IntersectionObserver' in window)) {
+      figures.forEach(function (fig) { draw(fig, useLoader); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        io.unobserve(entry.target);
+        draw(entry.target, useLoader);
+      });
+    }, { rootMargin: '500px 0px' });
+    figures.forEach(function (fig) { io.observe(fig); });
+  });
+})();
+</script>
+</body>
+</html>
