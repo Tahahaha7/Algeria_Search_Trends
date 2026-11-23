@@ -111,6 +111,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(HERE, "data")
 TRENDS_FILE = os.path.join(DATA_DIR, "trends.json")
 POOL_FILE = os.path.join(DATA_DIR, "pool.json")
+CACHE_FILE = os.path.join(HERE, ".cache", "answers.json")   # today's answers from Google
 
 
 class RateLimited(Exception):
@@ -129,6 +130,7 @@ class Trends:
         self.opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar))
         self.calls = 0
         self.waits = 0
+        self.cache = load(CACHE_FILE, {})
         self._get(BASE + "/?geo=" + GEO)   # a plain visit first, as a browser would make
 
     def _get(self, url):
@@ -174,31 +176,45 @@ class Trends:
                     "req": json.dumps(w["request"]), "token": w["token"]})
         raise Refused("Google sent no %s for this request" % widget_id)
 
+    def _kept(self, key, fetch):
+        """Today's answer to a request, asked only once: a run that was cut short resumes from here."""
+        hit = self.cache.get(key)
+        if not hit or hit["day"] != today():
+            hit = self.cache[key] = {"day": today(), "value": fetch()}
+            save(CACHE_FILE, {k: v for k, v in self.cache.items() if v["day"] == today()})
+        return json.loads(json.dumps(hit["value"]))    # a copy, so callers cannot alter the kept answer
+
     def timeline(self, keywords, prop):
         """Weekly interest for up to five keywords, scaled together 0-100."""
-        explore = self.explore(keywords, TIMELINE, prop)
-        points = self._widget(explore, "TIMESERIES", "multiline")["default"]["timelineData"]
-        now = time.time()
-        points = [p for p in points
-                  if not p.get("isPartial") and int(p["time"]) + 7 * 86400 <= now]
-        times = [int(p["time"]) for p in points]
-        series = [[p["value"][i] for p in points] for i in range(len(keywords))]
-        return times, series, keyword_names(explore, len(keywords))
+        def fetch():
+            explore = self.explore(keywords, TIMELINE, prop)
+            points = self._widget(explore, "TIMESERIES", "multiline")["default"]["timelineData"]
+            now = time.time()
+            points = [p for p in points
+                      if not p.get("isPartial") and int(p["time"]) + 7 * 86400 <= now]
+            times = [int(p["time"]) for p in points]
+            series = [[p["value"][i] for p in points] for i in range(len(keywords))]
+            return [times, series, keyword_names(explore, len(keywords))]
+        return self._kept("timeline|%s|%s" % (prop, "|".join(keywords)), fetch)
 
     def provinces(self, keywords, prop):
-        explore = self.explore(keywords, RECENT, prop)
-        rows = self._widget(explore, "GEO_MAP", "comparedgeo")["default"]["geoMapData"]
-        return [{"code": r["geoCode"],
-                 "name": re.sub(r"\s+Province$", "", r.get("geoName", "")),
-                 "values": r["value"]} for r in rows]
+        def fetch():
+            explore = self.explore(keywords, RECENT, prop)
+            rows = self._widget(explore, "GEO_MAP", "comparedgeo")["default"]["geoMapData"]
+            return [{"code": r["geoCode"],
+                     "name": re.sub(r"\s+Province$", "", r.get("geoName", "")),
+                     "values": r["value"]} for r in rows]
+        return self._kept("provinces|%s|%s" % (prop, "|".join(keywords)), fetch)
 
     def category_searches(self, category, prop):
         """Google's top and rising searches inside one of its categories."""
-        explore = self.explore([], RECENT, prop, category)
-        lists = self._widget(explore, "RELATED_QUERIES", "relatedsearches")["default"]["rankedList"]
-        lists = [[{"query": k.get("query", ""), "change": k.get("formattedValue", "")}
-                  for k in l.get("rankedKeyword") or []] for l in lists]
-        return (lists + [[], []])[:2]
+        def fetch():
+            explore = self.explore([], RECENT, prop, category)
+            lists = self._widget(explore, "RELATED_QUERIES", "relatedsearches")["default"]["rankedList"]
+            lists = [[{"query": k.get("query", ""), "change": k.get("formattedValue", "")}
+                      for k in l.get("rankedKeyword") or []] for l in lists]
+            return (lists + [[], []])[:2]
+        return self._kept("searches|%s|%s" % (prop, category), fetch)
 
     def suggest(self, text):
         """Google's topic suggestions for a name: [{mid, title, type}, ...]."""
