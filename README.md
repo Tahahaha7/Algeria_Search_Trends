@@ -12,12 +12,7 @@ The map highlights almost a perfect split between three regions of the country:
 - **North West:** the majority of provinces had **Renault** as the top searched car brand
 - **South:** the majority of regions had **Toyota** as the top searched car brand  
 
-I'm not sure about the divide between Peugeot and Renault in the North. Nevertheless, I suspect that the harsh environment in the South and maybe even the lack of reliable infrastructure led the Southern people to rely on Toyota.  
-  
-  
-<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2213_RC01/embed_loader.js"></script> 
-
-<script type="text/javascript"> trends.embed.renderExploreWidget("GEO_MAP", {"comparisonItem":[{"keyword":"/m/0h5wr7c","geo":"DZ","time":"today 5-y"},{"keyword":"/m/07ywl","geo":"DZ","time":"today 5-y"},{"keyword":"/m/0h5y1j0","geo":"DZ","time":"today 5-y"},{"keyword":"/m/05b4c","geo":"DZ","time":"today 5-y"},{"keyword":"/m/0f4v1","geo":"DZ","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&geo=DZ&q=%2Fm%2F0h5wr7c,%2Fm%2F07ywl,%2Fm%2F0h5y1j0,%2Fm%2F05b4c,%2Fm%2F0f4v1","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>  
+I'm not sure about the divide between Peugeot and Renault in the North. Nevertheless, I suspect that the harsh environment in the South and maybe even the lack of reliable infrastructure led the Southern people to rely on Toyota.
   
   
   
